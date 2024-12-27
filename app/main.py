@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.database import engine
 from app.models import Base
-from app.routers import auth
+from app.routers import auth, routes
 
 app = FastAPI()
 
@@ -14,3 +14,4 @@ async def startup():
 
 # Подключение роутеров
 app.include_router(auth.router)
+app.include_router(routes.router)
