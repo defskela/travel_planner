@@ -40,12 +40,10 @@ class RouteResponse(BaseModel):
 class RouteCreate(BaseModel):
     name: str
     place: str
-    weather: str
     date: date
 
 
 class RouteUpdate(BaseModel):
     name: Optional[str]
     place: Optional[str]
-    weather: Optional[str]
     date: Optional[date]

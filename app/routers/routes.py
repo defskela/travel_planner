@@ -9,6 +9,7 @@ from app.jwt import get_current_user
 from app.models import Route as RouteModel
 from app.models import User
 from app.schemas import RouteCreate, RouteResponse, RouteUpdate
+from app.utils import get_weather
 
 router = APIRouter(
     prefix="/routes",
@@ -31,7 +32,7 @@ async def create_route(route: RouteCreate, current_user: User = Depends(get_curr
     new_route = RouteModel(
         name=route.name,
         place=route.place,
-        weather=route.weather,
+        weather=get_weather(route.place),
         date=route.date,
         user_id=current_user.id
     )
@@ -55,10 +56,10 @@ async def update_route(route_id: int, route: RouteUpdate, current_user: User = D
         existing_route.name = route.name
     if route.place is not None:
         existing_route.place = route.place
-    if route.weather is not None:
-        existing_route.weather = route.weather
     if route.date is not None:
         existing_route.date = route.date
+    weather = get_weather(existing_route.place)
+    existing_route.weather = weather
 
     await db.commit()
     await db.refresh(existing_route)
