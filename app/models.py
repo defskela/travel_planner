@@ -19,7 +19,7 @@ class Route(Base):
     __tablename__ = "routes"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, index=True, nullable=False)
     place = Column(String, nullable=False)
     weather = Column(String, nullable=False)
     date = Column(Date, nullable=False)
