@@ -26,6 +26,17 @@ class TokenData(BaseModel):
 
 
 class RouteResponse(BaseModel):
+    id: int
+    name: str
+    place: str
+    weather: str
+    date: date
+
+    class Config:
+        orm_mode = True
+
+
+class RouteCreate(BaseModel):
     name: str
     place: str
     weather: str
