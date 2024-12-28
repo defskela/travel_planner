@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Date, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -11,6 +12,8 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
 
+    routes = relationship("Route", back_populates="user")
+
 
 class Route(Base):
     __tablename__ = "routes"
@@ -20,3 +23,6 @@ class Route(Base):
     place = Column(String, nullable=False)
     weather = Column(String, nullable=False)
     date = Column(Date, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+    user = relationship("User", back_populates="routes")
