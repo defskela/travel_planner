@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
@@ -41,3 +42,10 @@ class RouteCreate(BaseModel):
     place: str
     weather: str
     date: date
+
+
+class RouteUpdate(BaseModel):
+    name: Optional[str]
+    place: Optional[str]
+    weather: Optional[str]
+    date: Optional[date]
